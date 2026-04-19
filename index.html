@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תזונת חיטוב - תכנון יומי</title>
+    <style>
+        :root {
+            --primary-color: #2b3a42;
+            --accent-color: #e53935; /* שיניתי לאדום-כתום כדי לבדל ממסה */
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 50px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Calculator Section */
+        .calculator-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .calc-form .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-form .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .calc-form label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .calc-form input, .calc-form select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .calc-btn {
+            grid-column: span 2;
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .calc-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .calc-results {
+            background-color: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .calc-results h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .calc-results p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .calc-explanation {
+            font-size: 0.95rem !important;
+            color: #555;
+            margin-top: 15px !important;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ffcdd2;
+        }
+
+        /* Jotform Embed Container */
+        .form-wrapper {
+            width: 100%;
+            min-height: 800px;
+        }
+
+        .form-wrapper iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: var(--border-radius);
+        }
+
+        /* Shopping List Table */
+        .shopping-list {
+            text-align: center;
+        }
+
+        .shopping-list h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .shopping-list-desc {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Search Box */
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .card { padding: 20px; }
+            .calc-form { grid-template-columns: 1fr; }
+            .calc-form .form-group.full-width { grid-column: span 1; }
+            .calc-btn { grid-column: span 1; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>תכנון תזונה - שלב חיטוב</h1>
+        <p>מעקב ארוחות, גירעון קלורי וסנכרון ישיר ליומן</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="card calculator-section" style="text-align: center;">
+            <h2>מחשבון נתונים אישיים</h2>
+            <div class="calc-form" style="text-align: right;">
+                <div class="form-group">
+                    <label>מין</label>
+                    <select id="calcGender">
+                        <option value="male">זכר</option>
+                        <option value="female">נקבה</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>גיל (שנים)</label>
+                    <input type="number" id="calcAge" min="15" max="120" value="25">
+                </div>
+                <div class="form-group">
+                    <label>גובה (ס"מ)</label>
+                    <input type="number" id="calcHeight" min="100" max="250" value="175">
+                </div>
+                <div class="form-group">
+                    <label>משקל (ק"ג)</label>
+                    <input type="number" id="calcWeight" min="30" max="300" value="70">
+                </div>
+                <div class="form-group full-width">
+                    <label>רמת פעילות גופנית יומיומית</label>
+                    <select id="calcActivity">
+                        <option value="1.2">אורח חיים יושבני (עבודה משרדית, ללא אימונים)</option>
+                        <option value="1.375">פעילות קלה (אימון 1-3 פעמים בשבוע)</option>
+                        <option value="1.55">פעילות בינונית (אימון 3-5 פעמים בשבוע)</option>
+                        <option value="1.725">פעילות עצימה (אימון יומי או עבודה פיזית)</option>
+                    </select>
+                </div>
+                <button id="calcBtn" class="calc-btn">חשב נתונים</button>
+            </div>
+
+            <div id="calcResults" class="calc-results" style="display: none; text-align: right;">
+                <h3>תוצאות החישוב:</h3>
+                <p><strong>BMI:</strong> <span id="resBMI"></span> (<span id="resBMICategory"></span>)</p>
+                <p><strong>הוצאה אנרגטית יומית (TDEE):</strong> <span id="resTDEE"></span> קלוריות</p>
+                <div class="calc-explanation">
+                    המספר המוצג מעלה (קלוריות) מציין את כמות האנרגיה שגופך שורף ביום בממוצע, על מנת לשמור על משקלך הקיים.<br><br>
+                    • לתהליך של <strong>חיטוב וירידה באחוזי השומן</strong>, עליך להיות ב<strong>גירעון קלורי</strong> (לאכול פחות מה-TDEE שלך).<br>
+                    • לרוב, מומלץ להוריד בין 300 ל-500 קלוריות מהמספר הזה כדי לרדת במשקל בצורה מבוקרת ובריאה תוך שימור מסת שריר.
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="form-wrapper">
+                <iframe
+                  id="JotFormIFrame-260745026087054"
+                  title="חיטוב"
+                  onload="window.parent.scrollTo(0,0)"
+                  allowtransparency="true"
+                  allow="geolocation; microphone; camera; fullscreen; payment"
+                  src="https://form.jotform.com/260745026087054"
+                  frameborder="0"
+                  style="min-width:100%;max-width:100%;height:539px;border:none;"
+                  scrolling="no"
+                >
+                </iframe>
+                <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+                <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260745026087054']", "https://form.jotform.com/")</script>
+            </div>
+        </div>
+
+        <div class="card shopping-list">
+            <h2>רשימת קניות לחיטוב והערכת מחירים משוערת</h2>
+            <p class="shopping-list-desc">מבוסס על התפריט לתקופת החיטוב. המחירים הם אומדן ממוצע לרשתות השיווק.</p>
+            
+            <input type="text" id="searchInput" class="search-box" placeholder="חיפוש מוצר (לדוגמה: יוגורט חלבון)...">
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>קטגוריה</th>
+                            <th>מוצר</th>
+                            <th>הערכת מחיר</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>חלבון (רזה)</td><td>חזה עוף / פילה עוף / חזה הודו (1 ק"ג טרי)</td><td class="price">30₪ - 45₪</td></tr>
+                        <tr><td>חלבון (רזה)</td><td>כבד עוף טרי (1 ק"ג)</td><td class="price">15₪ - 25₪</td></tr>
+                        <tr><td>חלבון (רזה)</td><td>כתף בקר / שייטל (1 ק"ג)</td><td class="price">60₪ - 90₪</td></tr>
+                        <tr><td>חלבון (רזה)</td><td>פסטרמה 3% ממעדניה (100 גרם)</td><td class="price">8₪ - 12₪</td></tr>
+                        <tr><td>חלבון (שמן)</td><td>בשר טחון / פרגיות / כרעיים (1 ק"ג טרי)</td><td class="price">40₪ - 60₪</td></tr>
+                        <tr><td>חלבון (שמן)</td><td>סינטה / פילה בקר טרי (1 ק"ג)</td><td class="price">100₪ - 160₪</td></tr>
+                        <tr><td>חלבון (דגים)</td><td>פילה סלמון / דניס (1 ק"ג קפוא/טרי)</td><td class="price">80₪ - 120₪</td></tr>
+                        <tr><td>חלבון (דגים)</td><td>טונה במים (מארז 4 קופסאות)</td><td class="price">20₪ - 25₪</td></tr>
+                        <tr><td>חלבון (דגים)</td><td>טונה בשמן - לאחר סינון (מארז 4 קופסאות)</td><td class="price">20₪ - 25₪</td></tr>
+                        
+                        <tr><td>חלבון (ביצים)</td><td>ביצים (תבנית 30 יחידות, מידה L)</td><td class="price">35₪ - 40₪</td></tr>
+                        <tr><td>חלבון (גבינות)</td><td>גבינה צהובה 9% / 5% (אריזת פרוסות)</td><td class="price">15₪ - 25₪</td></tr>
+                        <tr><td>חלבון (גבינות)</td><td>קוטג' / גבינה לבנה 3% או 5% (גביע 250 גרם)</td><td class="price">5₪ - 7₪</td></tr>
+                        <tr><td>חלבון (גבינות)</td><td>גבינת חמד 5% (אריזה)</td><td class="price">15₪ - 20₪</td></tr>
+                        <tr><td>חלבון (גבינות)</td><td>בולגרית / צפתית / פטה 5% (אריזה)</td><td class="price">15₪ - 22₪</td></tr>
+                        <tr><td>חלבון (גבינות)</td><td>סימפוניה / לאבנה 5% (גביע)</td><td class="price">10₪ - 15₪</td></tr>
+                        
+                        <tr><td>חלבון (מעדנים)</td><td>יוגורט חלבון 20 גרם (לדוגמה דנונה PRO - גביע)</td><td class="price">5₪ - 8₪</td></tr>
+                        <tr><td>חלבון (מעדנים)</td><td>משקה חלבון יוגורט GO / יטבתה פרו (בקבוק)</td><td class="price">10₪ - 15₪</td></tr>
+                        <tr><td>חלבון (תוספים)</td><td>חטיף חלבון עד 220 קלוריות (יחידה)</td><td class="price">10₪ - 15₪</td></tr>
+                        <tr><td>חלבון (תוספים)</td><td>אבקת חלבון (מיכל של כ-70 מנות)</td><td class="price">250₪ - 350₪</td></tr>
+                        
+                        <tr><td>פחמימה</td><td>לחם קל / לחם לבן (אריזה/כיכר)</td><td class="price">10₪ - 18₪</td></tr>
+                        <tr><td>פחמימה</td><td>פריכיות אורז (אריזה)</td><td class="price">8₪ - 12₪</td></tr>
+                        <tr><td>פחמימה</td><td>אורז לבן / בסמטי (1 ק"ג)</td><td class="price">8₪ - 14₪</td></tr>
+                        <tr><td>פחמימה</td><td>תפוחי אדמה / בטטה (1 ק"ג)</td><td class="price">4₪ - 9₪</td></tr>
+                        <tr><td>פחמימה</td><td>פסטה (חבילה, 500 גרם)</td><td class="price">5₪ - 8₪</td></tr>
+                        <tr><td>פחמימה (מורכבת)</td><td>בורגול / קינואה / שיבולת שועל (אריזה)</td><td class="price">10₪ - 25₪</td></tr>
+                        <tr><td>פחמימה (קטניות)</td><td>שעועית לבנה / אפונה / תירס / גרגירי חומוס (קפוא/יבש)</td><td class="price">12₪ - 20₪</td></tr>
+                        
+                        <tr><td>שומן</td><td>אבוקדו (1 ק"ג)</td><td class="price">10₪ - 20₪</td></tr>
+                        <tr><td>שומן</td><td>טחינה גולמית (צנצנת 500 גרם)</td><td class="price">12₪ - 20₪</td></tr>
+                        <tr><td>שומן</td><td>זיתים (קופסת שימורים)</td><td class="price">7₪ - 12₪</td></tr>
+                        <tr><td>שומן</td><td>שקדים / אגוזים מלך (100 גרם)</td><td class="price">10₪ - 15₪</td></tr>
+                        <tr><td>שומן</td><td>חמאת בוטנים טבעית (צנצנת)</td><td class="price">15₪ - 25₪</td></tr>
+                        <tr><td>שונות</td><td>תרסיס שמן</td><td class="price">15₪ - 20₪</td></tr>
+
+                        <tr><td>ירקות (חופשי)</td><td>עגבנייה, מלפפון, בצל, פלפל, כרוב, חסה, פטריות (1 ק"ג)</td><td class="price">4₪ - 10₪</td></tr>
+                        <tr><td>משקאות</td><td>שתייה זירו / מים / סודה</td><td class="price">6₪ - 10₪ (לשישייה)</td></tr>
+                        <tr><td>שונות (תבלינים)</td><td>מלח, פלפל, פפריקה, שום גבישי</td><td class="price">10₪ - 20₪</td></tr>
+                        
+                        <tr><td>שונות (צ'יט/העמסה)</td><td>פיצה מעדנות (550 גרם קפוא) או מגש פיצה</td><td class="price">30₪ - 60₪</td></tr>
+                        <tr><td>שונות (צ'יט/העמסה)</td><td>סושי (4 רולים) / המבורגר פאסט-פוד</td><td class="price">50₪ - 80₪</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            /* --- קוד למחשבון BMI ו-TDEE --- */
+            const calcBtn = document.getElementById('calcBtn');
+            const calcResults = document.getElementById('calcResults');
+            const resBMI = document.getElementById('resBMI');
+            const resBMICategory = document.getElementById('resBMICategory');
+            const resTDEE = document.getElementById('resTDEE');
+
+            calcBtn.addEventListener('click', function() {
+                const gender = document.getElementById('calcGender').value;
+                const age = parseFloat(document.getElementById('calcAge').value);
+                const height = parseFloat(document.getElementById('calcHeight').value);
+                const weight = parseFloat(document.getElementById('calcWeight').value);
+                const activityMultiplier = parseFloat(document.getElementById('calcActivity').value);
+
+                if(!age || !height || !weight) {
+                    alert('נא למלא את כל השדות בצורה תקינה.');
+                    return;
+                }
+
+                // חישוב BMI
+                const heightInMeters = height / 100;
+                const bmi = weight / (heightInMeters * heightInMeters);
+                resBMI.textContent = bmi.toFixed(1);
+
+                // קטגוריות BMI
+                let category = "";
+                if(bmi < 18.5) category = "תת משקל";
+                else if(bmi >= 18.5 && bmi < 25) category = "משקל תקין";
+                else if(bmi >= 25 && bmi < 30) category = "עודף משקל";
+                else category = "השמנת יתר";
+                resBMICategory.textContent = category;
+
+                // חישוב BMR לפי נוסחת Mifflin-St Jeor
+                let bmr = 0;
+                if(gender === 'male') {
+                    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+                } else {
+                    bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+                }
+
+                // חישוב TDEE
+                const tdee = bmr * activityMultiplier;
+                resTDEE.textContent = Math.round(tdee);
+
+                calcResults.style.display = 'block';
+            });
+
+            /* --- קוד לחיפוש אלפביתי ברשימת הקניות --- */
+            const searchInput = document.getElementById('searchInput');
+            const tbody = document.querySelector('.shopping-list tbody');
+            const originalRows = Array.from(tbody.querySelectorAll('tr')); 
+
+            searchInput.addEventListener('input', function(e) {
+                const term = e.target.value.trim().toLowerCase();
+
+                if (term === '') {
+                    tbody.innerHTML = '';
+                    originalRows.forEach(row => {
+                        row.style.display = '';
+                        tbody.appendChild(row);
+                    });
+                    return;
+                }
+
+                let visibleRows = [];
+                let hiddenRows = [];
+
+                originalRows.forEach(row => {
+                    const productCell = row.querySelectorAll('td')[1];
+                    const productName = productCell.textContent.trim().toLowerCase();
+
+                    if (productName.includes(term)) { // שיניתי ל-includes לחיפוש נוח יותר מ-startsWith
+                        visibleRows.push({ row: row, name: productName });
+                    } else {
+                        hiddenRows.push(row);
+                    }
+                });
+
+                visibleRows.sort((a, b) => a.name.localeCompare(b.name, 'he'));
+
+                tbody.innerHTML = '';
+
+                visibleRows.forEach(item => {
+                    item.row.style.display = '';
+                    tbody.appendChild(item.row);
+                });
+
+                hiddenRows.forEach(row => {
+                    row.style.display = 'none';
+                    tbody.appendChild(row);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

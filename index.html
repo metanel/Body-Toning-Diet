@@ -7,7 +7,7 @@
     <style>
         :root {
             --primary-color: #2b3a42;
-            --accent-color: #e53935; /* שיניתי לאדום-כתום כדי לבדל ממסה */
+            --accent-color: #e53935;
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -300,7 +300,7 @@
                 <p><strong>BMI:</strong> <span id="resBMI"></span> (<span id="resBMICategory"></span>)</p>
                 <p><strong>הוצאה אנרגטית יומית (TDEE):</strong> <span id="resTDEE"></span> קלוריות</p>
                 <div class="calc-explanation">
-                    המספר המוצג מעלה (קלוריות) מציין את כמות האנרגיה שגופך שורף ביום בממוצע, על מנת לשמור על משקלך הקיים.<br><br>
+                    המספר המוצג מעלה (קלוריות) מציין את כמות האנרגיה שגופך שורף ביום בממוצע, על מנת לשמור על משקלך הקיים בדיוק כפי שהוא כעת.<br><br>
                     • לתהליך של <strong>חיטוב וירידה באחוזי השומן</strong>, עליך להיות ב<strong>גירעון קלורי</strong> (לאכול פחות מה-TDEE שלך).<br>
                     • לרוב, מומלץ להוריד בין 300 ל-500 קלוריות מהמספר הזה כדי לרדת במשקל בצורה מבוקרת ובריאה תוך שימור מסת שריר.
                 </div>
@@ -310,25 +310,25 @@
         <div class="card">
             <div class="form-wrapper">
                 <iframe
-                  id="JotFormIFrame-260745026087054"
+                  id="JotFormIFrame-261087557209463"
                   title="חיטוב"
                   onload="window.parent.scrollTo(0,0)"
                   allowtransparency="true"
                   allow="geolocation; microphone; camera; fullscreen; payment"
-                  src="https://form.jotform.com/260745026087054"
+                  src="https://form.jotform.com/261087557209463"
                   frameborder="0"
                   style="min-width:100%;max-width:100%;height:539px;border:none;"
                   scrolling="no"
                 >
                 </iframe>
                 <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
-                <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260745026087054']", "https://form.jotform.com/")</script>
+                <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-261087557209463']", "https://form.jotform.com/")</script>
             </div>
         </div>
 
         <div class="card shopping-list">
             <h2>רשימת קניות לחיטוב והערכת מחירים משוערת</h2>
-            <p class="shopping-list-desc">מבוסס על התפריט לתקופת החיטוב. המחירים הם אומדן ממוצע לרשתות השיווק.</p>
+            <p class="shopping-list-desc">המחירים המופיעים מטה הם אומדן ממוצע המבוסס על רשתות שיווק מוזלות. המחירים עשויים להשתנות בהתאם למבצעים ולסניף.</p>
             
             <input type="text" id="searchInput" class="search-box" placeholder="חיפוש מוצר (לדוגמה: יוגורט חלבון)...">
 
@@ -342,49 +342,197 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>חלבון (רזה)</td><td>חזה עוף / פילה עוף / חזה הודו (1 ק"ג טרי)</td><td class="price">30₪ - 45₪</td></tr>
-                        <tr><td>חלבון (רזה)</td><td>כבד עוף טרי (1 ק"ג)</td><td class="price">15₪ - 25₪</td></tr>
-                        <tr><td>חלבון (רזה)</td><td>כתף בקר / שייטל (1 ק"ג)</td><td class="price">60₪ - 90₪</td></tr>
-                        <tr><td>חלבון (רזה)</td><td>פסטרמה 3% ממעדניה (100 גרם)</td><td class="price">8₪ - 12₪</td></tr>
-                        <tr><td>חלבון (שמן)</td><td>בשר טחון / פרגיות / כרעיים (1 ק"ג טרי)</td><td class="price">40₪ - 60₪</td></tr>
-                        <tr><td>חלבון (שמן)</td><td>סינטה / פילה בקר טרי (1 ק"ג)</td><td class="price">100₪ - 160₪</td></tr>
-                        <tr><td>חלבון (דגים)</td><td>פילה סלמון / דניס (1 ק"ג קפוא/טרי)</td><td class="price">80₪ - 120₪</td></tr>
-                        <tr><td>חלבון (דגים)</td><td>טונה במים (מארז 4 קופסאות)</td><td class="price">20₪ - 25₪</td></tr>
-                        <tr><td>חלבון (דגים)</td><td>טונה בשמן - לאחר סינון (מארז 4 קופסאות)</td><td class="price">20₪ - 25₪</td></tr>
+                        <tr>
+                            <td>חלבון (רזה)</td>
+                            <td>חזה עוף / פילה עוף / חזה הודו (1 ק"ג טרי)</td>
+                            <td class="price">30₪ - 45₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (רזה)</td>
+                            <td>כבד עוף טרי (1 ק"ג)</td>
+                            <td class="price">15₪ - 25₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (רזה)</td>
+                            <td>כתף בקר / שייטל (1 ק"ג)</td>
+                            <td class="price">60₪ - 90₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (רזה)</td>
+                            <td>פסטרמה 3% ממעדניה (100 גרם)</td>
+                            <td class="price">8₪ - 12₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (שמן)</td>
+                            <td>בשר טחון / פרגיות / כרעיים (1 ק"ג טרי)</td>
+                            <td class="price">40₪ - 60₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (שמן)</td>
+                            <td>סינטה / פילה בקר טרי (1 ק"ג)</td>
+                            <td class="price">100₪ - 160₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (דגים)</td>
+                            <td>פילה סלמון / דניס (1 ק"ג קפוא/טרי)</td>
+                            <td class="price">80₪ - 120₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (דגים)</td>
+                            <td>טונה במים (מארז 4 קופסאות)</td>
+                            <td class="price">20₪ - 25₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (דגים)</td>
+                            <td>טונה בשמן - לאחר סינון (מארז 4 קופסאות)</td>
+                            <td class="price">20₪ - 25₪</td>
+                        </tr>
                         
-                        <tr><td>חלבון (ביצים)</td><td>ביצים (תבנית 30 יחידות, מידה L)</td><td class="price">35₪ - 40₪</td></tr>
-                        <tr><td>חלבון (גבינות)</td><td>גבינה צהובה 9% / 5% (אריזת פרוסות)</td><td class="price">15₪ - 25₪</td></tr>
-                        <tr><td>חלבון (גבינות)</td><td>קוטג' / גבינה לבנה 3% או 5% (גביע 250 גרם)</td><td class="price">5₪ - 7₪</td></tr>
-                        <tr><td>חלבון (גבינות)</td><td>גבינת חמד 5% (אריזה)</td><td class="price">15₪ - 20₪</td></tr>
-                        <tr><td>חלבון (גבינות)</td><td>בולגרית / צפתית / פטה 5% (אריזה)</td><td class="price">15₪ - 22₪</td></tr>
-                        <tr><td>חלבון (גבינות)</td><td>סימפוניה / לאבנה 5% (גביע)</td><td class="price">10₪ - 15₪</td></tr>
+                        <tr>
+                            <td>חלבון (ביצים)</td>
+                            <td>ביצים (תבנית 30 יחידות, מידה L)</td>
+                            <td class="price">35₪ - 40₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (גבינות)</td>
+                            <td>גבינה צהובה 9% / 5% (אריזת פרוסות)</td>
+                            <td class="price">15₪ - 25₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (גבינות)</td>
+                            <td>קוטג' / גבינה לבנה 3% או 5% (גביע 250 גרם)</td>
+                            <td class="price">5₪ - 7₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (גבינות)</td>
+                            <td>גבינת חמד 5% (אריזה)</td>
+                            <td class="price">15₪ - 20₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (גבינות)</td>
+                            <td>בולגרית / צפתית / פטה 5% (אריזה)</td>
+                            <td class="price">15₪ - 22₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (גבינות)</td>
+                            <td>סימפוניה / לאבנה 5% (גביע)</td>
+                            <td class="price">10₪ - 15₪</td>
+                        </tr>
                         
-                        <tr><td>חלבון (מעדנים)</td><td>יוגורט חלבון 20 גרם (לדוגמה דנונה PRO - גביע)</td><td class="price">5₪ - 8₪</td></tr>
-                        <tr><td>חלבון (מעדנים)</td><td>משקה חלבון יוגורט GO / יטבתה פרו (בקבוק)</td><td class="price">10₪ - 15₪</td></tr>
-                        <tr><td>חלבון (תוספים)</td><td>חטיף חלבון עד 220 קלוריות (יחידה)</td><td class="price">10₪ - 15₪</td></tr>
-                        <tr><td>חלבון (תוספים)</td><td>אבקת חלבון (מיכל של כ-70 מנות)</td><td class="price">250₪ - 350₪</td></tr>
+                        <tr>
+                            <td>חלבון (מעדנים)</td>
+                            <td>יוגורט חלבון 20 גרם (לדוגמה דנונה PRO - גביע)</td>
+                            <td class="price">5₪ - 8₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (מעדנים)</td>
+                            <td>משקה חלבון יוגורט GO / יטבתה פרו (בקבוק)</td>
+                            <td class="price">10₪ - 15₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (תוספים)</td>
+                            <td>חטיף חלבון עד 220 קלוריות (יחידה)</td>
+                            <td class="price">10₪ - 15₪</td>
+                        </tr>
+                        <tr>
+                            <td>חלבון (תוספים)</td>
+                            <td>אבקת חלבון (מיכל של כ-70 מנות)</td>
+                            <td class="price">250₪ - 350₪</td>
+                        </tr>
                         
-                        <tr><td>פחמימה</td><td>לחם קל / לחם לבן (אריזה/כיכר)</td><td class="price">10₪ - 18₪</td></tr>
-                        <tr><td>פחמימה</td><td>פריכיות אורז (אריזה)</td><td class="price">8₪ - 12₪</td></tr>
-                        <tr><td>פחמימה</td><td>אורז לבן / בסמטי (1 ק"ג)</td><td class="price">8₪ - 14₪</td></tr>
-                        <tr><td>פחמימה</td><td>תפוחי אדמה / בטטה (1 ק"ג)</td><td class="price">4₪ - 9₪</td></tr>
-                        <tr><td>פחמימה</td><td>פסטה (חבילה, 500 גרם)</td><td class="price">5₪ - 8₪</td></tr>
-                        <tr><td>פחמימה (מורכבת)</td><td>בורגול / קינואה / שיבולת שועל (אריזה)</td><td class="price">10₪ - 25₪</td></tr>
-                        <tr><td>פחמימה (קטניות)</td><td>שעועית לבנה / אפונה / תירס / גרגירי חומוס (קפוא/יבש)</td><td class="price">12₪ - 20₪</td></tr>
+                        <tr>
+                            <td>פחמימה</td>
+                            <td>לחם קל / לחם לבן (אריזה/כיכר)</td>
+                            <td class="price">10₪ - 18₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה</td>
+                            <td>פריכיות אורז (אריזה)</td>
+                            <td class="price">8₪ - 12₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה</td>
+                            <td>אורז לבן / בסמטי (1 ק"ג)</td>
+                            <td class="price">8₪ - 14₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה</td>
+                            <td>תפוחי אדמה / בטטה (1 ק"ג)</td>
+                            <td class="price">4₪ - 9₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה</td>
+                            <td>פסטה (חבילה, 500 גרם)</td>
+                            <td class="price">5₪ - 8₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה (מורכבת)</td>
+                            <td>בורגול / קינואה / שיבולת שועל (אריזה)</td>
+                            <td class="price">10₪ - 25₪</td>
+                        </tr>
+                        <tr>
+                            <td>פחמימה (קטניות)</td>
+                            <td>שעועית לבנה / אפונה / תירס / גרגירי חומוס (קפוא/יבש)</td>
+                            <td class="price">12₪ - 20₪</td>
+                        </tr>
                         
-                        <tr><td>שומן</td><td>אבוקדו (1 ק"ג)</td><td class="price">10₪ - 20₪</td></tr>
-                        <tr><td>שומן</td><td>טחינה גולמית (צנצנת 500 גרם)</td><td class="price">12₪ - 20₪</td></tr>
-                        <tr><td>שומן</td><td>זיתים (קופסת שימורים)</td><td class="price">7₪ - 12₪</td></tr>
-                        <tr><td>שומן</td><td>שקדים / אגוזים מלך (100 גרם)</td><td class="price">10₪ - 15₪</td></tr>
-                        <tr><td>שומן</td><td>חמאת בוטנים טבעית (צנצנת)</td><td class="price">15₪ - 25₪</td></tr>
-                        <tr><td>שונות</td><td>תרסיס שמן</td><td class="price">15₪ - 20₪</td></tr>
+                        <tr>
+                            <td>שומן</td>
+                            <td>אבוקדו (1 ק"ג)</td>
+                            <td class="price">10₪ - 20₪</td>
+                        </tr>
+                        <tr>
+                            <td>שומן</td>
+                            <td>טחינה גולמית (צנצנת 500 גרם)</td>
+                            <td class="price">12₪ - 20₪</td>
+                        </tr>
+                        <tr>
+                            <td>שומן</td>
+                            <td>זיתים (קופסת שימורים)</td>
+                            <td class="price">7₪ - 12₪</td>
+                        </tr>
+                        <tr>
+                            <td>שומן</td>
+                            <td>שקדים / אגוזים מלך (100 גרם)</td>
+                            <td class="price">10₪ - 15₪</td>
+                        </tr>
+                        <tr>
+                            <td>שומן</td>
+                            <td>חמאת בוטנים טבעית (צנצנת)</td>
+                            <td class="price">15₪ - 25₪</td>
+                        </tr>
+                        <tr>
+                            <td>שונות</td>
+                            <td>תרסיס שמן</td>
+                            <td class="price">15₪ - 20₪</td>
+                        </tr>
 
-                        <tr><td>ירקות (חופשי)</td><td>עגבנייה, מלפפון, בצל, פלפל, כרוב, חסה, פטריות (1 ק"ג)</td><td class="price">4₪ - 10₪</td></tr>
-                        <tr><td>משקאות</td><td>שתייה זירו / מים / סודה</td><td class="price">6₪ - 10₪ (לשישייה)</td></tr>
-                        <tr><td>שונות (תבלינים)</td><td>מלח, פלפל, פפריקה, שום גבישי</td><td class="price">10₪ - 20₪</td></tr>
+                        <tr>
+                            <td>ירקות (חופשי)</td>
+                            <td>עגבנייה, מלפפון, בצל, פלפל, כרוב, חסה, פטריות (1 ק"ג)</td>
+                            <td class="price">4₪ - 10₪</td>
+                        </tr>
+                        <tr>
+                            <td>משקאות</td>
+                            <td>שתייה זירו / מים / סודה</td>
+                            <td class="price">6₪ - 10₪</td>
+                        </tr>
+                        <tr>
+                            <td>שונות (תבלינים)</td>
+                            <td>מלח, פלפל, פפריקה, שום גבישי</td>
+                            <td class="price">10₪ - 20₪</td>
+                        </tr>
                         
-                        <tr><td>שונות (צ'יט/העמסה)</td><td>פיצה מעדנות (550 גרם קפוא) או מגש פיצה</td><td class="price">30₪ - 60₪</td></tr>
-                        <tr><td>שונות (צ'יט/העמסה)</td><td>סושי (4 רולים) / המבורגר פאסט-פוד</td><td class="price">50₪ - 80₪</td></tr>
+                        <tr>
+                            <td>שונות (צ'יט/העמסה)</td>
+                            <td>פיצה מעדנות (550 גרם קפוא) או מגש פיצה</td>
+                            <td class="price">30₪ - 60₪</td>
+                        </tr>
+                        <tr>
+                            <td>שונות (צ'יט/העמסה)</td>
+                            <td>סושי (4 רולים) / המבורגר פאסט-פוד</td>
+                            <td class="price">50₪ - 80₪</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -465,7 +613,7 @@
                     const productCell = row.querySelectorAll('td')[1];
                     const productName = productCell.textContent.trim().toLowerCase();
 
-                    if (productName.includes(term)) { // שיניתי ל-includes לחיפוש נוח יותר מ-startsWith
+                    if (productName.includes(term)) {
                         visibleRows.push({ row: row, name: productName });
                     } else {
                         hiddenRows.push(row);
